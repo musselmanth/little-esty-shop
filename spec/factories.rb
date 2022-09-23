@@ -34,5 +34,11 @@ FactoryBot.define do
   factory :merchant do
     name { Faker::Company.name}
   end
+
+  factory :bulk_discount do
+    merchant
+    threshold { 10 }
+    discount { 0.15 }
+  end
   
 end
