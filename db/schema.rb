@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_09_23_203118) do
   create_table "bulk_discounts", force: :cascade do |t|
     t.integer "threshhold"
     t.decimal "discount"
-    t.bigint "merchants_id"
-    t.index ["merchants_id"], name: "index_bulk_discounts_on_merchants_id"
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_bulk_discounts_on_merchant_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2022_09_23_203118) do
     t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
-  add_foreign_key "bulk_discounts", "merchants", column: "merchants_id"
+  add_foreign_key "bulk_discounts", "merchants"
   add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"
