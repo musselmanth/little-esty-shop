@@ -1,0 +1,11 @@
+<%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
+<div id="discounts_container">
+  <h2 class="subtitle">My Bulk Discounts</h2>
+  <% @bulk_discounts.each do |bulk_discount| %>
+    <div class="bulk_discount" id="discount_<%= bulk_discount.id %>">
+      <strong><%= link_to "Bulk Discount ##{bulk_discount.id}", merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></strong>
+      Threshold: <%= bulk_discount.threshold %> items
+      Discount Percentage: <%= percent_convert(bulk_discount.discount) %>
+    </div>
+  <% end %>
+</div>

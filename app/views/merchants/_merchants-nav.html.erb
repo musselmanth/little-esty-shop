@@ -24,5 +24,13 @@
         <li class="nav_button">My Invoices</li>
       <% end %>  
     <% end %>
+
+    <% if current_page?(merchant_bulk_discounts_path(merchant.id)) %>
+      <li class="selected_nav_button">My Bulk Discounts</li>
+    <% else %>
+      <%= link_to merchant_bulk_discounts_path(merchant.id) do %>
+        <li class="nav_button">My Bulk Discounts</li>
+      <% end %>  
+    <% end %>
   </ul>
 </div>
