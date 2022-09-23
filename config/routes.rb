@@ -7,10 +7,9 @@ Rails.application.routes.draw do
       resources :items, except: [:destroy]
       resources :invoices, only: [:index, :show]
       resources :bulk_discounts, only: [:index, :show]
+      resources :invoice_items, only: [:update]
     end
   end
-
-  resources :invoice_items, only: [:update]
 
   namespace :admin do
     get '/', to: 'dashboard#index'

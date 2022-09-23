@@ -54,7 +54,6 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     within("tr#invoice_item_#{@inv_item_1.id}") do
       select "Shipped", from: "invoice_item_status"
       click_button "Update Status"
-      
       expect(current_path).to eq(merchant_invoice_path(@merchant_1.id, @invoice_1.id))
       expect(@inv_item_1.reload.status).to eq("shipped")
     end
