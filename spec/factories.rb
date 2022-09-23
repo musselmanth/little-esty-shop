@@ -21,18 +21,18 @@ FactoryBot.define do
 
   factory :item do 
     merchant
-    sequence(:name){ |n| "Item #{n}"}
-    description {"test item description"}
+    name {Faker::Commerce.product_name }
+    description { Faker::Quote.yoda }
     unit_price { rand(100..15000) }
   end
 
   factory :customer do
-    sequence(:first_name) {|n| "Firstname#{n}"}
-    sequence(:last_name) {|n| "Lastname#{n}"}
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
   end
 
   factory :merchant do
-    sequence(:name){ |n| "Merchant #{n}" }
+    name { Faker::Company.name}
   end
   
 end
