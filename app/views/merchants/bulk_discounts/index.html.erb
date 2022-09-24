@@ -1,6 +1,7 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
 <div id="discounts_container">
   <h2 class="subtitle">My Bulk Discounts</h2>
+  <%= link_to "New Bulk Discount", new_merchant_bulk_discount_path(@merchant) %>
   <% @bulk_discounts.each do |bulk_discount| %>
     <div class="bulk_discount" id="discount_<%= bulk_discount.id %>">
       <strong><%= link_to "Bulk Discount ##{bulk_discount.id}", merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></strong>
