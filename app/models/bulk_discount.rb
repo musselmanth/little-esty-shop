@@ -18,8 +18,6 @@ class BulkDiscount < ApplicationRecord
     only_integer: true,
     message: "must be a positive whole number"
   }
-    
-  private
 
   def convert_discount_to_decimal
     self.discount /= 100
