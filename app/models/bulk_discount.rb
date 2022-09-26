@@ -2,6 +2,7 @@ class BulkDiscount < ApplicationRecord
   belongs_to :merchant
   
   before_create :convert_discount_to_decimal
+  before_update :convert_discount_to_decimal
 
   validates :discount, presence: true
   validates :discount, numericality: {
@@ -17,8 +18,6 @@ class BulkDiscount < ApplicationRecord
     only_integer: true,
     message: "must be a positive whole number"
   }
-    
-  private
 
   def convert_discount_to_decimal
     self.discount /= 100

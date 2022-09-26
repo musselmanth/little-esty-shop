@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get '/dashboard', to: 'dashboard#show', as: :dashboard
       resources :items, except: [:destroy]
       resources :invoices, only: [:index, :show]
-      resources :bulk_discounts, except: [:update]
+      resources :bulk_discounts
       resources :invoice_items, only: [:update]
     end
   end
