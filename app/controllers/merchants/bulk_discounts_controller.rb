@@ -28,6 +28,11 @@ class Merchants::BulkDiscountsController < ApplicationController
     end
   end
 
+  def destroy
+    BulkDiscount.destroy(params[:id])
+    redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+  end
+
   private
 
   def bulk_discount_params
