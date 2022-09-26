@@ -47,4 +47,14 @@ RSpec.describe 'Merchant Bulk Discount Index Page' do
       expect(page).to have_link("Delete")
     end
   end
+
+  it 'destroys the bulk discount upon clicking' do
+    within("div#discount_#{@discount_1.id}") do
+      click_link("Delete")
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant.id))
+    expect(page).to_not have_css("div#discount_#{@discount_1.id}")
+    expect(BulkDiscount.exists?(id: @discount_1.id)).to be false
+  end
 end
