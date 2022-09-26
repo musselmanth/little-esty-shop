@@ -7,7 +7,7 @@ RSpec.describe BulkDiscount, type: :model do
 
   describe 'helper methods' do
     it 'convert discount decimal to percentage' do
-      discount = create(:bulk_discount, discount: 0.15)
+      discount = create(:bulk_discount, discount: 15)
       expect(discount.discount).to eq(0.15)
       expect(percent_convert(discount.discount)).to eq("15%")
     end

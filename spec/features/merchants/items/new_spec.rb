@@ -20,26 +20,26 @@ RSpec.describe 'Merchant New Item page' do
         click_link "New Item"
 
         expect(current_path).to eq(new_merchant_item_path(@merch1.id))
-        expect(page).to have_content('Create a New Item')
+        expect(page).to have_content('Create New Item')
       end
 
       it 'there is a form to add an item' do
         visit (new_merchant_item_path(@merch2.id))
 
-        expect(page).to have_content('Enter Item Name')
-        expect(page).to have_content('Enter Item Description')
-        expect(page).to have_content('Enter Item Price')
-        expect(page).to have_button('Submit')
+        expect(page).to have_content('Item Name')
+        expect(page).to have_content('Item Description')
+        expect(page).to have_content('Unit Price')
+        expect(page).to have_button('Create Item')
       end
 
-      it "filling out form and clicking 'Submit' redirects to merchant index page" do
+      it "filling out form and clicking 'Create Item' redirects to merchant index page" do
         visit (new_merchant_item_path(@merch2.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Enter Item Description', with: 'Does a thing'
-        fill_in 'Enter Item Price', with: '42.95'
+        fill_in 'Item Name', with: 'Gadget'
+        fill_in 'Item Description', with: 'Does a thing'
+        fill_in 'Unit Price', with: '42.95'
 
-        click_button 'Submit'
+        click_button 'Create Item'
 
         expect(current_path).to eq(merchant_items_path(@merch2.id))
       end
@@ -47,11 +47,11 @@ RSpec.describe 'Merchant New Item page' do
       it "new item is displayed on merchant index page and by default set to 'disabled'" do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Enter Item Description', with: 'Does a thing'
-        fill_in 'Enter Item Price', with: '42.95'
+        fill_in 'Item Name', with: 'Gadget'
+        fill_in 'Item Description', with: 'Does a thing'
+        fill_in 'Unit Price', with: '42.95'
 
-        click_button 'Submit'
+        click_button 'Create Item'
 
         expect(current_path).to eq(merchant_items_path(@merch1.id))
 
@@ -68,36 +68,35 @@ RSpec.describe 'Merchant New Item page' do
       it 'has sad path for name' do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Description', with: 'Does a thing'
-        fill_in 'Enter Item Price', with: '42.95'
+        fill_in 'Item Description', with: 'Does a thing'
+        fill_in 'Unit Price', with: '42.95'
 
-        click_button 'Submit'
-
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information.")
-        # expect(error).to match[/Entry is invalid. Please fill in all entries with valid information*/]
+        click_button 'Create Item'
+        
+        expect(page).to have_content("Name can't be blank")
       end
 
       it 'has sad path for description' do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Enter Item Price', with: '42.95'
+        fill_in 'Item Name', with: 'Gadget'
+        fill_in 'Unit Price', with: '42.95'
 
-        click_button 'Submit'
+        click_button 'Create Item'
 
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information")
+        expect(page).to have_content("Description can't be blank")
       end
 
       it 'has sad path for unit_price' do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Enter Item Description', with: 'Does a thing'
-        fill_in 'Enter Item Price', with: 'forty dollars'
+        fill_in 'Item Name', with: 'Gadget'
+        fill_in 'Item Description', with: 'Does a thing'
+        fill_in 'Unit Price', with: 'forty dollars'
 
-        click_button 'Submit'
+        click_button 'Create Item'
 
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information")
+        expect(page).to have_content("Unit price is not a number")
       end
     end
   end

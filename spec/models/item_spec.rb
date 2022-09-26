@@ -8,17 +8,14 @@ RSpec.describe Item, type: :model do
   describe 'validations' do
     it 'validates name' do
       should validate_presence_of(:name)
-        .with_message('Please add a Name for the item.')
     end
 
     it 'validates name' do
       should validate_presence_of(:description)
-        .with_message('Please add a description of the item.')
     end
 
     it 'validates name' do
       should validate_presence_of(:unit_price)
-        .with_message('Price is not valid')
     end
   end
 

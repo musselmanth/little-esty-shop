@@ -2,8 +2,8 @@
 <h2 class="subtitle">New Bulk Discount</h2>
 <%= form_with model: [:merchant, @bulk_discount], local: true do |f| %>
   <%= f.label :threshold, "Item Quantity Threshold: " %>
-  <%= f.text_field :theshold %>
+  <%= f.text_field :threshold, size: 3 %><br>
   <%= f.label :discount, "Percent Discount: " %>
-  <%= f.text_field :discount %>%
-  <%= f.submit %>
+  <%= f.text_field :discount, size: 3 %>%<br>
+  <%= f.submit "Create Bulk Discount" %>
 <% end %>

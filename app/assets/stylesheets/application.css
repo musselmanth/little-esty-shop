@@ -172,6 +172,11 @@ a:visited {
   font-size: 18px;
 }
 
+.bulk_discount {
+  padding: 10px;
+  font-size: 18px;
+}
+
 .top_five_customer {
   font-size: 22px;
   padding: 5px;
@@ -183,6 +188,15 @@ a:visited {
 
 .item_ready {
   margin: 5px;
+}
+
+.field_with_errors {
+  display: inline;
+}
+
+.field_with_errors input {
+  border: 2px outset red;
+  border-radius: 5px;
 }
 
 

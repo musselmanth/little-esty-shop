@@ -32,7 +32,7 @@ class Admin::MerchantsController < ApplicationController
     else
       merchant.update(merchant_params)
       redirect_to "/admin/merchants/#{merchant.id}"
-      flash[:message] = "You've successfully updated your information"
+      flash[:messages] = ["You've successfully updated your information"]
     end
   end
 

@@ -18,32 +18,34 @@ class Merchants::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    merchant = Merchant.find(@item.merchant_id)
+    @merchant = Merchant.find(@item.merchant_id)
     if params.has_key?(:status)
       @item.update(status: params[:status])
-      redirect_to merchant_items_path(merchant.id)
+      redirect_to merchant_items_path(@merchant.id)
     elsif @item.update(item_params)
-      flash[:success] = "#{@item.name} has been successfully updated."
-      redirect_to merchant_item_path(merchant.id, @item.id)
+      flash[:messages] = ["#{@item.name} has been successfully updated."]
+      redirect_to merchant_item_path(@merchant.id, @item.id)
     else
-      flash[:error] = "Entry is invalid. Please fill in all entries with valid information."
+      flash[:messages] = @item.errors.full_messages
       render :edit
     end
   end
 
   def new
     @item = Item.new(merchant_id: params[:merchant_id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
     params[:item][:merchant_id] = params[:merchant_id]
     @item = Item.new(item_params)
+    @merchant = Merchant.find(params[:merchant_id])
 
     if @item.save
+      flash[:messages] = ["#{@item.name} has been successfully created."]
       redirect_to merchant_items_path(params[:merchant_id])
-      flash[:success] = "#{@item.name} has been successfully created."
     else
-      flash[:error] = "Entry is invalid. Please fill in all entries with valid information."
+      flash[:messages] = @item.errors.full_messages
       render :new
     end
   end
