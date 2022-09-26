@@ -4,5 +4,4 @@
 Item Quantity Threshold: <%= @bulk_discount.threshold %> items<br>
 Discount Percentage: <%= percent_convert(@bulk_discount.discount) %>
 </p>
-<%= link_to "Delete", merchant_bulk_discount_path(@merchant.id, @bulk_discount.id), method: :delete %><br>
-<%= link_to "Back", merchant_bulk_discounts_path(@merchant.id) %>
+<%= link_to "Edit Bulk Discount", edit_merchant_bulk_discount_path(@merchant.id) %>
