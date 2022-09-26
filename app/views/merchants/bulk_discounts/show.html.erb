@@ -1,0 +1,8 @@
+<%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
+<h2 class="subtitle">Bulk Discount | id: <%= @bulk_discount.id %></h2>
+<p>
+Item Quantity Threshold: <%= @bulk_discount.threshold %> items<br>
+Discount Percentage: <%= percent_convert(@bulk_discount.discount) %>
+</p>
+<%= link_to "Delete", merchant_bulk_discount_path(@merchant.id, @bulk_discount.id), method: :delete %><br>
+<%= link_to "Back", merchant_bulk_discounts_path(@merchant.id) %>
