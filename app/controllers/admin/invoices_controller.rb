@@ -11,7 +11,7 @@ class Admin::InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find(params[:id])
     if @invoice.update(invoice_params)
-      flash[:success] = "Invoice #{@invoice.id} status successfully updated."
+      flash[:messages] = ["Invoice #{@invoice.id} status successfully updated."]
       render :show
     end
   end

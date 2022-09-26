@@ -4,9 +4,10 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
-  validates :name, presence: { message: "Please add a Name for the item." }
-  validates :description, presence: { message: "Please add a description of the item." }
-  validates :unit_price, numericality: { message: "Price is not valid" }
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :unit_price, presence: true
+  validates :unit_price, numericality: true
 
   def top_revenue_date
     invoices.joins(:invoice_items, :transactions)

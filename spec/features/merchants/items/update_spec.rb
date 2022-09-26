@@ -83,7 +83,8 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         click_button "Update Item"
 
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information")
+
+        expect(page).to have_content("Unit price is not a number")
       end
 
       it 'I see a flash message stating that the information has been successfully updated' do
@@ -91,11 +92,11 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         fill_in "Update Name:", with: ''
         fill_in "Update Description:", with: 'Description new'
-        fill_in "Update Unit Price:", with: "Sweet, sweet bread"
+        fill_in "Update Unit Price:", with: "185"
 
         click_button "Update Item"
-
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information")
+        
+        expect(page).to have_content("Name can't be blank")
       end
 
       it 'I see a flash message stating that the information has been successfully updated' do
@@ -103,11 +104,11 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         fill_in "Update Name:", with: 'Something New'
         fill_in "Update Description:", with: ''
-        fill_in "Update Unit Price:", with: "Sweet, sweet bread"
+        fill_in "Update Unit Price:", with: "186"
 
         click_button "Update Item"
 
-        expect(page).to have_content("Entry is invalid. Please fill in all entries with valid information")
+        expect(page).to have_content("Description can't be blank")
       end
     end
   end

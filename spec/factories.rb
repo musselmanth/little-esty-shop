@@ -38,7 +38,7 @@ FactoryBot.define do
   factory :bulk_discount do
     merchant
     threshold { 10 }
-    discount { 0.15 }
+    discount { 15 }
   end
   
 end
