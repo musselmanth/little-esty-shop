@@ -100,12 +100,6 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '.total_discount' do
-      it 'returns the total discount for the invoice' do
-        expect(@invoice.total_discount).to eq(34712)
-      end
-    end
-
     describe '.revenue_with_discounts' do
       it 'returns the total revenue for the invoice with discounts subtracted' do
         expect(@invoice.total_revenue_with_discounts).to eq(212413)

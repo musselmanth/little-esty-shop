@@ -4,6 +4,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
   before(:each) do
     @merchant_1 = create(:merchant)
+    @bulk_discount = create(:bulk_discount, threshold: 5, discount: 10, merchant: @merchant_1)
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_1)
 
@@ -11,7 +12,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     @item_3 = create(:item, merchant: @merchant_2)
 
     @invoice_1 = create(:invoice, status: :in_progress)
-    @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, status: :packaged)
+    @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, quantity: 5, status: :packaged)
     @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, status: :packaged)
     @inv_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_3)
 
@@ -65,5 +66,20 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
   it 'lists the total revenue for the merchants items on the invoice' do
     integer_total_revenue = @merchant_1.invoice_items_for_invoice(@invoice_1.id).total_revenue
     expect(page).to have_content("Total Revenue: #{price_convert(integer_total_revenue)}")
+  end
+
+  it 'lists the total discounted revenue' do
+    integer_discounts_revenue = @merchant_1.invoice_items_for_invoice(@invoice_1.id).revenue_with_discounts
+    expect(page).to have_content("Total Discounted Revenue: #{price_convert(integer_discounts_revenue)}")
+  end
+
+  it 'displays the discount percentage and link to bulk discount on invoice_items table' do
+    within("tr#invoice_item_#{@inv_item_1.id}") do
+      expect(page).to have_content("#{percent_convert(@bulk_discount.discount)} - ")
+      expect(page).to have_link("View Discount")
+      click_link("View Discount")
+      
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1.id, @bulk_discount.id))
+    end
   end
 end

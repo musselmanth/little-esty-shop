@@ -21,10 +21,6 @@ class Invoice < ApplicationRecord
     invoice_items.total_revenue
   end
 
-  def total_discount
-    invoice_items.total_discount
-  end
-
   def total_revenue_with_discounts
     invoice_items.revenue_with_discounts
   end
