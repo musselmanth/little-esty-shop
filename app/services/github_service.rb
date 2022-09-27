@@ -1,6 +1,4 @@
-require 'httparty'
-
-class GitHubService
+class GithubService
 
   def self.get_uri(uri)
     response = HTTParty.get(uri)

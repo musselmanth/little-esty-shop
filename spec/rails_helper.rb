@@ -38,14 +38,19 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.before(:each) do
-    allow(GitHubService).to receive(:repo).and_return({name: "little-esty-shop" })
-    allow(GitHubService).to receive(:contributors).and_return([
+    allow(GithubService).to receive(:repo).and_return({name: "little-esty-shop" })
+    allow(GithubService).to receive(:contributors).and_return([
       {login: "user1", contributions: 1},
       {login: "user2", contributions: 1},
       {login: "user3", contributions: 1},
       {login: "user4", contributions: 1}
     ])
-    allow(GitHubService).to receive(:get_pulls).and_return([{number: 74}])
+    allow(GithubService).to receive(:get_pulls).and_return([{number: 74}])
+    allow(HolidayService).to receive(:get_three_holidays).and_return([
+      { date: '12/25/22', name: 'Christmas Day' },
+      { date: '12/31/22', name: 'New Years Eve'},
+      { date: '1/1/23', name: 'New Years Day'}
+    ])
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

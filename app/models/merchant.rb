@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :items
   has_many :bulk_discounts
 
+  scope :enabled, -> {where(status: true)}
+
   def distinct_invoices
     invoices.distinct
   end
