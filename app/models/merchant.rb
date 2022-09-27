@@ -9,6 +9,11 @@ class Merchant < ApplicationRecord
     invoices.distinct
   end
 
+  def invoice_items_for_invoice(invoice_id)
+    invoice_items
+      .where(invoice_id: invoice_id)
+  end
+
   def inv_items_ready_to_ship
     invoice_items
       .joins(:invoice)

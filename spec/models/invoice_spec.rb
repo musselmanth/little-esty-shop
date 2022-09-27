@@ -2,13 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
   describe 'relationships' do
-
     it {should belong_to(:customer)}
     it {should have_many(:transactions)}
     it {should have_many(:invoice_items)}
     it {should have_many(:transactions)}
     it {should have_many(:items).through(:invoice_items)}
-
   end
 
   describe 'status enum' do
@@ -85,53 +83,27 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'instance methods' do
-
-    before(:each) do
-      @merchant_1 = create(:merchant)
-      @item_1 = create(:item, merchant: @merchant_1, unit_price: 1500, name: 'Pencil')
-      @item_2 = create(:item, merchant: @merchant_1)
-
-      @merchant_2 = create(:merchant)
-      @item_3 = create(:item, merchant: @merchant_2, name: 'Art', unit_price: 10000)
-      @item_4 = create(:item, merchant: @merchant_2)
-      @item_5 = create(:item, merchant: @merchant_2, name: 'Coaster', unit_price: 500)
-
-      @invoice_1 = create(:invoice)
-
-      @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, quantity: 375, unit_price: 1450)
-      @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_3, quantity: 5, unit_price: 9950)
-      @inv_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_5, quantity: 10, unit_price: 450)
+    before :each do
+      @merchant = create(:merchant)
+      @bulk_discount_1 = create(:bulk_discount, threshold: 6, discount: 10, merchant: @merchant)
+      @bulk_discount_2 = create(:bulk_discount, threshold: 10, discount: 15, merchant: @merchant)
+      @items = create_list(:item, 5, merchant: @merchant)
+      @invoice = create(:invoice)
+      @invoice_item_1 = create(:invoice_item, item: @items[0], quantity: 15, unit_price: 15000, invoice: @invoice)
+      @invoice_item_3 = create(:invoice_item, item: @items[2], quantity: 7, unit_price: 1375, invoice: @invoice)
+      @invoice_item_5 = create(:invoice_item, item: @items[4], quantity: 5, unit_price: 2500, invoice: @invoice)
     end
 
-    describe '.merchant_items' do
-      it 'returns a list of items on an invoice belonging to a merchant. includes item name and information from invoice_item' do
-        merchant_1_items = @invoice_1.merchant_items(@merchant_1)
-
-        expect(merchant_1_items.length).to eq(1)
-        expect(merchant_1_items.pluck(:name)).to eq(["Pencil"])
-        expect(merchant_1_items.pluck(:quantity)).to eq([375])
-        expect(merchant_1_items.pluck(:unit_price)).to eq([1450])
-
-        merchant_2_items = @invoice_1.merchant_items(@merchant_2)
-
-        expect(merchant_2_items.length).to eq(2)
-        expect(merchant_2_items.pluck(:name)).to eq(["Art", "Coaster"])
-        expect(merchant_2_items.pluck(:quantity)).to eq([5, 10])
-        expect(merchant_2_items.pluck(:unit_price)).to eq([9950, 450])
+    describe '.total_revenue' do
+      it "returns the total_revenue for an invoice" do
+        expect(@invoice.total_revenue).to eq(247125)
       end
     end
 
-    describe '.total_revenue'
-      it "returs the total_revenue" do
-        @merchant1 = Merchant.create!(name: 'Hair Care')
-        @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
-        @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
-        @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-        @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-        @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 2)
-        @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
-
-        expect(@invoice_1.total_revenue).to eq(100)
+    describe '.revenue_with_discounts' do
+      it 'returns the total revenue for the invoice with discounts subtracted' do
+        expect(@invoice.total_revenue_with_discounts).to eq(212413)
       end
+    end
   end
 end

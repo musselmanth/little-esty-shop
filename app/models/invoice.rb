@@ -5,15 +5,9 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :transactions
   has_many :items, through: :invoice_items
+  has_many :bulk_discounts, through: :invoice_items
 
   enum status: [:in_progress, :completed, :cancelled]
-
-  def merchant_items(merchant)
-    invoice_items
-      .joins(:item)
-      .select('invoice_items.*, items.name, items.merchant_id')
-      .where('items.merchant_id = ?', merchant.id)
-  end
 
   def self.incomplete_invoices
     joins(:invoice_items)
@@ -24,6 +18,10 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum("unit_price * quantity")
+    invoice_items.total_revenue
+  end
+
+  def total_revenue_with_discounts
+    invoice_items.revenue_with_discounts
   end
 end
