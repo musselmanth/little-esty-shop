@@ -3,6 +3,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
   has_one :merchant, through: :item
+  has_many :bulk_discounts, through: :merchant
 
   enum status: [:pending, :packaged, :shipped]
 
@@ -17,5 +18,4 @@ class InvoiceItem < ApplicationRecord
   def invoice_date
     invoice.created_at
   end
-
 end
