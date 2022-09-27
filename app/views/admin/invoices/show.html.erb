@@ -11,6 +11,7 @@
 </div>
 <div class="inv_info"><strong>Created on:</strong> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></div>
 <div class="inv_info"><strong>Total Revenue:</strong> <%= price_convert(@invoice.total_revenue) %></div>
+<div class="inv_info"><strong>Total Discounted Revenue:</strong> <%= price_convert(@invoice.total_revenue_with_discounts) %></div>
 <div class="inv_info"><strong>Items on this Invoice:</strong></div>
 <table class="invoice_items">
   <tr>
