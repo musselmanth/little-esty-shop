@@ -18,7 +18,7 @@
     </tr>
     <% @invoice_items.each do |invoice_item| %>
       <tr id="invoice_item_<%= invoice_item.id %>">
-        <td><%= invoice_item.name %></td>
+        <td><%= invoice_item.item_name %></td>
         <td><%= invoice_item.quantity %></td>
         <td><%= price_convert(invoice_item.unit_price) %></td>
         <td>

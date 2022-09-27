@@ -5,12 +5,13 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :items
   has_many :bulk_discounts
 
-  def min_bulk_discount_threshold
-    bulk_discounts.minimum(:threshold)
-  end
-
   def distinct_invoices
     invoices.distinct
+  end
+
+  def invoice_items_for_invoice(invoice_id)
+    invoice_items
+      .where(invoice_id: invoice_id)
   end
 
   def inv_items_ready_to_ship

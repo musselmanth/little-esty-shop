@@ -63,7 +63,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
   end
 
   it 'lists the total revenue for the merchants items on the invoice' do
-    integer_total_revenue = @invoice_1.merchant_items(@merchant_1).total_revenue
+    integer_total_revenue = @merchant_1.invoice_items_for_invoice(@invoice_1.id).total_revenue
     expect(page).to have_content("Total Revenue: #{price_convert(integer_total_revenue)}")
   end
 end

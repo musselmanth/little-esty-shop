@@ -9,13 +9,6 @@ class Invoice < ApplicationRecord
 
   enum status: [:in_progress, :completed, :cancelled]
 
-  def merchant_items(merchant_id)
-    invoice_items
-      .joins(:item)
-      .select('invoice_items.*, items.name')
-      .where('items.merchant_id = ?', merchant_id)
-  end
-
   def self.incomplete_invoices
     joins(:invoice_items)
       .select('invoices.*')
@@ -25,6 +18,14 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum("unit_price * quantity")
+    invoice_items.total_revenue
+  end
+
+  def total_discount
+    invoice_items.total_discount
+  end
+
+  def total_revenue_with_discounts
+    invoice_items.revenue_with_discounts
   end
 end
