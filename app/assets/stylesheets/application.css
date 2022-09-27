@@ -27,6 +27,11 @@ body {
   margin: 0px;
 }
 
+#page_title a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #merchants_nav {
   display: flex;
   flex-direction: row;
