@@ -6,7 +6,7 @@ class BulkDiscount < ApplicationRecord
 
   validates :discount, presence: true
   validates :discount, numericality: {
-    greater_than_or_equal_to: 0, 
+    greater_than_or_equal_to: 1, 
     less_than: 100, 
     only_integer: true,
     message: "must be a number between 1 and 100"

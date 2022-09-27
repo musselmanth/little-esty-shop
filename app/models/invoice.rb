@@ -9,11 +9,11 @@ class Invoice < ApplicationRecord
 
   enum status: [:in_progress, :completed, :cancelled]
 
-  def merchant_items(merchant)
+  def merchant_items(merchant_id)
     invoice_items
       .joins(:item)
-      .select('invoice_items.*, items.name, items.merchant_id')
-      .where('items.merchant_id = ?', merchant.id)
+      .select('invoice_items.*, items.name')
+      .where('items.merchant_id = ?', merchant_id)
   end
 
   def self.incomplete_invoices
