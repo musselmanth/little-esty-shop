@@ -1,12 +1,26 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
-<div id="discounts_container">
-  <h2 class="subtitle">My Bulk Discounts</h2>
-  <div class="bulk_discount"><%= link_to "New Bulk Discount", new_merchant_bulk_discount_path(@merchant) %></div>
-  <% @bulk_discounts.each_with_index do |bulk_discount, i| %>
-    <div class="bulk_discount" id="discount_<%= bulk_discount.id %>">
-      <strong><%= link_to "Bulk Discount #{i + 1}", merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></strong> | <%= link_to "Delete", merchant_bulk_discount_path(@merchant.id, bulk_discount.id), method: :delete %><br>
-      Item Quantity Threshold: <%= bulk_discount.threshold %> items<br>
-      Discount Percentage: <%= percent_convert(bulk_discount.discount) %>
-    </div>
-  <% end %>
+<h2 class="subtitle">Bulk Discounts</h2>
+
+<div id="index_body">
+  <div class="index_column">
+    <h3>My Discounts</h3>
+    <%= link_to "New Bulk Discount", new_merchant_bulk_discount_path(@merchant) %>
+    <% @bulk_discounts.each_with_index do |bulk_discount, i| %>
+      <div class="bulk_discount" id="discount_<%= bulk_discount.id %>">
+        <strong><%= link_to "Bulk Discount #{i + 1}", merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></strong> | <%= link_to "Delete", merchant_bulk_discount_path(@merchant.id, bulk_discount.id), method: :delete %><br>
+        Item Quantity Threshold: <%= bulk_discount.threshold %> items<br>
+        Discount Percentage: <%= percent_convert(bulk_discount.discount) %>
+      </div>
+    <% end %>
+  </div>
+  <div class="index_column">
+    <h3>Upcoming US Holidays</h3>
+      <ol>
+        <% @holidays.each do |holiday| %>
+          <li class="holiday">
+            <strong><%= holiday[:name] %></strong><br><%= holiday[:date] %>
+          </li>
+        <% end %>
+      </ol>
+  </div>
 </div>

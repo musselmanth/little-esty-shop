@@ -10,16 +10,16 @@
   </head>
 
   <body>
-    <h1 id="page_title">&nbsp;&nbsp;Little Esty Shop</h1>
+    <div id="page_title">Little Esty Shop</div>
     <div id="welcome_nav">
-      <ul id="welcome_nav_buttons">
+      <div id="welcome_nav_buttons">
         <%= link_to merchants_path do %>
-          <li class="welcome_nav_button_left">Merchant Dashboards Index</li>
+          <div class="welcome_nav_button_left">Merchant Dashboards Index</div>
         <% end %>
         <%= link_to admin_dashboard_path do %>
-          <li class="welcome_nav_button_right">Admin Dashboard</li>
+          <div class="welcome_nav_button_right">Admin Dashboard</div>
         <% end %>
-      </ul>
+      </div>
     </div>
 
     <% if flash.count > 0 %>

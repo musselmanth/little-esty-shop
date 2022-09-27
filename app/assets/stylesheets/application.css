@@ -166,6 +166,26 @@ body {
   background-color: darkgray;
 }
 
+.welcome_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+
+.welcome_body {
+  width: 70%;
+}
+
+.welcome_readme {
+  padding: 15px;
+  background-color: darkgray;
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 10px 10px 10px gray;
+}
+
 .nav_button:hover {
   padding: 10px;
   border-radius: 20px;
@@ -272,6 +292,10 @@ a:visited {
 .merchant {
   padding: 5px;
   padding-left: 30px;
+}
+
+.holiday {
+  padding: 10px;
 }
 
 

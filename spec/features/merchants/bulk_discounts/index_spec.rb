@@ -57,4 +57,14 @@ RSpec.describe 'Merchant Bulk Discount Index Page' do
     expect(page).to_not have_css("div#discount_#{@discount_1.id}")
     expect(BulkDiscount.exists?(id: @discount_1.id)).to be false
   end
+
+  it 'lists 3 upcoming holidays' do
+    expect(page).to have_content("Upcoming US Holidays")
+    expect(page).to have_content("Christmas Day")
+    expect(page).to have_content("12/31/22")
+    expect(page).to have_content("New Years Eve")
+    expect(page).to have_content("12/31/22")
+    expect(page).to have_content("New Years Day")
+    expect(page).to have_content("1/1/23")
+  end
 end
