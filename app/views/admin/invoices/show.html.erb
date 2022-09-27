@@ -1,14 +1,17 @@
-<h1>Invoice #<%= @invoice.id %></h1>
-<div id="status-update-<%= @invoice.id %>">
-  <strong>Status: </strong>
-  <%= form_with model: [:admin, @invoice], local: true do |f| %>
-    <%= f.select :status, [["In Progress", :in_progress], ["Completed", :completed], ["Cancelled", :cancelled]] %>
-    <%= f.submit %>
-  <% end %>
+<%= render partial: '/admin/admin-nav' %>
+<h2 class="subtitle">Invoice #<%= @invoice.id %></h2>
+<div class="inv_info">
+  <div class="invoice_status_container" id="status-update-<%= @invoice.id %>">
+    <strong>Status:&nbsp;</strong>
+    <%= form_with model: [:admin, @invoice], local: true do |f| %>
+      <%= f.select :status, [["In Progress", :in_progress], ["Completed", :completed], ["Cancelled", :cancelled]] %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>
-<p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-<p>Total Revenue: <%= price_convert(@invoice.total_revenue) %></p>
-<p><strong>Items on Invoice:</strong></p>
+<div class="inv_info"><strong>Created on:</strong> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></div>
+<div class="inv_info"><strong>Total Revenue:</strong> <%= price_convert(@invoice.total_revenue) %></div>
+<div class="inv_info"><strong>Items on this Invoice:</strong></div>
 <table class="invoice_items">
   <tr>
   <th>Item</th><th>Quantity Sold</th><th>Price Sold</th><th>Item Status</th>

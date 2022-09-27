@@ -13,7 +13,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
     @invoice_1 = create(:invoice, status: :in_progress)
     @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, quantity: 5, status: :packaged)
-    @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, status: :packaged)
+    @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, quantity: 1, status: :packaged)
     @inv_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_3)
 
     visit merchant_invoice_path(@merchant_1.id, @invoice_1.id)
@@ -80,6 +80,12 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
       click_link("View Discount")
       
       expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1.id, @bulk_discount.id))
+    end
+  end
+
+  it 'shows N/A for invoice_items that do not have a bulk discount' do
+    within("tr#invoice_item_#{@inv_item_2.id}") do
+      expect(page).to have_content("N/A")
     end
   end
 end

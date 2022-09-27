@@ -42,11 +42,10 @@
     <ol>
       <% @top_five.each do |item| %>
         <div id="rev_item_<%= item.id %>">
-          <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> 
-              <%rev = item.item_revenue %>
-              <%= price_convert(rev) %>
+          <li>
+            <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= price_convert(item.item_revenue) %>
           </li>
-              <p>Top selling date for <%= item.name %> was <%= item.top_revenue_date.strftime("%A, %B %-d, %Y") %></p>
+          <p>Top selling date for <%= item.name %> was <%= item.top_revenue_date.strftime("%A, %B %-d, %Y") %></p>
         </div>
       <% end %>
     </ol>

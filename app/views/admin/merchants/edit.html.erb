@@ -1,9 +1,10 @@
-<h1><%=@merchant.name%> Edit Page</h1>
+<%= render partial: '/admin/admin-nav' %>
+<h2 class="subtitle">Edit Merchant <%= @merchant.name %></h2>
 
-<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, value: @merchant.name %>
-
-  <%= f.submit "Update merchant" %>
-
+<div class="inv_info">
+  <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |form| %>
+    <%= form.label :name, "Merchant Name: " %> 
+    <%= form.text_field :name, value: @merchant.name %><br>
+    <%= form.submit 'Update Merchant' %>
   <% end %>
+</div>
