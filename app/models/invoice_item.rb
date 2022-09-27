@@ -11,6 +11,23 @@ class InvoiceItem < ApplicationRecord
     sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
+  def self.total_discount
+    item_discounts = self
+      .joins(:bulk_discounts)
+      .select('MAX(invoice_items.quantity * invoice_items.unit_price * bulk_discounts.discount) AS item_discount')
+      .where('invoice_items.quantity >= bulk_discounts.threshold')
+      .group('items.name, invoice_items.id, items.merchant_id')
+    Invoice
+      .from(item_discounts, :item_discounts)
+      .pluck('SUM(item_discounts.item_discount)').first.to_i
+  end
+
+  
+
+  def self.revenue_with_discounts
+    total_revenue - total_discount
+  end
+
   def item_name
     item.name
   end
