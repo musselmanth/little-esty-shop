@@ -20,9 +20,9 @@ RSpec.describe "Merchants Show Page" do
 
     visit "admin/merchants/#{merchant3.id}"
 
-    expect(page).to have_content("Update #{merchant3.name} information")
+    expect(page).to have_content("Update Merchant")
 
-    click_link "Update #{merchant3.name} information"
+    click_link "Update Merchant"
 
     expect(current_path).to eq("/admin/merchants/#{merchant3.id}/edit")
 

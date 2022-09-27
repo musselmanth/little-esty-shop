@@ -10,8 +10,18 @@
   </head>
 
   <body>
+    <h1 id="page_title">&nbsp;&nbsp;Little Esty Shop</h1>
+    <div id="welcome_nav">
+      <ul id="welcome_nav_buttons">
+        <%= link_to merchants_path do %>
+          <li class="welcome_nav_button_left">Merchant Dashboards Index</li>
+        <% end %>
+        <%= link_to admin_dashboard_path do %>
+          <li class="welcome_nav_button_right">Admin Dashboard</li>
+        <% end %>
+      </ul>
+    </div>
 
-    <h1 id="page_title">Little Esty Shop</h1>
     <% if flash.count > 0 %>
       <div id="flash_messages">
         <div class='flash_message'>

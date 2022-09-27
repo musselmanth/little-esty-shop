@@ -76,7 +76,7 @@ RSpec.describe 'admin dashboard' do
   end
 
   it "lists the top 5 customers by transaction" do
-    expect(page).to have_content('Top 5 Customers')
+    expect(page).to have_content('Top Customers')
 
     expect(page).to have_content(@customer1.first_name)
     expect(page).to have_content(@customer1.last_name)
@@ -117,7 +117,7 @@ RSpec.describe 'admin dashboard' do
   end
 
   it 'has the creation date for the invoices' do
-    expect(page).to have_content("Date Created: #{@invoice2.created_at.strftime("%A, %B %-d, %Y")}")
+    expect(page).to have_content(" - #{@invoice2.created_at.strftime("%A, %B %-d, %Y")}")
   end
 
   it 'is ordered with the oldest first' do

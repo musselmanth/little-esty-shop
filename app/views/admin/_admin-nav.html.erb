@@ -1,0 +1,28 @@
+<div id="merchants_nav">
+  <span id="merchant_name">Admin Dashboard</span>
+  <ul id="nav_buttons">
+    <% if current_page?(admin_dashboard_path) %>
+      <li class="selected_nav_button">Dashboard</li>
+    <% else %>
+      <%= link_to admin_dashboard_path do %>
+        <li class="nav_button">Dashboard</li>
+      <% end %>
+    <% end %>
+
+    <% if current_page?(admin_merchants_path) %>
+      <li class="selected_nav_button">Merchants</li>
+    <% else %>
+      <%= link_to admin_merchants_path do %>
+        <li class="nav_button">Merchants</li>
+      <% end %>
+    <% end %>
+    
+    <% if current_page?(admin_invoices_path) %>
+      <li class="selected_nav_button">Invoices</li>
+    <% else %>
+      <%= link_to admin_invoices_path do %>
+        <li class="nav_button">Invoices</li>
+      <% end %>  
+    <% end %>
+  </ul>
+</div>
