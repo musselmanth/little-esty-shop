@@ -4,6 +4,7 @@ RSpec.describe 'Admin Invoices Show Page' do
   describe 'Admin Invoices Index Page' do
     before :each do
       @m1 = Merchant.create!(name: 'Merchant 1')
+      @bulk_discount_1 = create(:bulk_discount, merchant: @m1, threshold: 10, discount: 15)
   
       @c1 = Customer.create!(first_name: 'Yo', last_name: 'Yoz')
       @c2 = Customer.create!(first_name: 'Hey', last_name: 'Heyz')
@@ -45,10 +46,12 @@ RSpec.describe 'Admin Invoices Show Page' do
   
     it 'should display the total revenue the invoice will generate' do
       expect(page).to have_content("Total Revenue: #{price_convert(@i1.total_revenue)}")
-  
-      expect(page).to_not have_content(@i2.total_revenue)
     end
-  
+
+    it 'should display the total revnue with discounts' do
+      expect(page).to have_content("Total Discounted Revenue: #{price_convert(@i1.total_revenue_with_discounts)}")
+    end
+
     it 'should have status as a select field that updates the invoices status' do
       within("#status-update-#{@i1.id}") do
         select('Cancelled', :from => 'invoice[status]')
