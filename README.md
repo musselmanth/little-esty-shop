@@ -1,4 +1,4 @@
-# Little Esty Shop
+# Little Esty Shop - Thomas Musselman
 
 ## Links
 
