@@ -22,8 +22,8 @@
         <% @holidays.each do |holiday| %>
           <li class="holiday">
             <div class ="holiday_name"><strong><%= holiday.name %></strong><br><%= holiday.date.strftime("%A, %B %-d, %Y") %></div>
-              <% if holiday.has_discount? %>
-                <div><%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, holiday.discount_id) %></div>
+              <% if holiday.has_discount?(@merchant.id) %>
+                <div><%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, holiday.discount_id(@merchant.id)) %></div>
               <% else %>
                 <div><%= button_to "Create Holiday Discount", new_merchant_bulk_discount_path(@merchant.id), method: :get, params:[ threshold: 2, discount: 30, holiday: holiday.name ] %></div>
               <% end %>

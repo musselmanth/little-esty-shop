@@ -24,6 +24,6 @@ class BulkDiscount < ApplicationRecord
   end
 
   def self.all_holidays
-    pluck(:holiday)
+    pluck(:holiday, :merchant_id)
   end
 end
