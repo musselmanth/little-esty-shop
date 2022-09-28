@@ -1,9 +1,7 @@
 class GithubService
 
   def self.get_uri(uri)
-    # access_token = "token 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"
-    # response = HTTParty.get(uri, headers: {authorization: access_token})
-    response = HTTParty.get(uri)
+    response = HTTParty.get(uri, headers: {authorization: "token #{ENV["GITHUB_API_KEY"]}"})
     JSON.parse(response.body, symbolize_names: true)
   end
 
