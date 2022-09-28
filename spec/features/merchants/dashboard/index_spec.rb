@@ -103,7 +103,7 @@ RSpec.describe 'Merchant Dashboard Index' do
       @merchant.inv_items_ready_to_ship.each do |inv_item|
         visit(merchant_dashboard_path(@merchant.id))
         within ("li#item_ready_#{inv_item.id}")  do
-          expect(page).to have_content("#{inv_item.item_name} - Invoice ##{inv_item.invoice_id} - #{inv_item.invoice_date.strftime("%A, %B %-d, %Y")}")
+          expect(page).to have_content("#{inv_item.item_name} - Invoice ##{inv_item.invoice_id} Invoice Date: #{inv_item.invoice_date.strftime("%A, %B %-d, %Y")}")
           expect(page).to have_link("#{inv_item.invoice_id}")
   
           click_link("#{inv_item.invoice_id}")

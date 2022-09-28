@@ -1,9 +1,23 @@
 <div class="welcome_container">
   <div class="welcome_body">
     <br>
-    <%# <h1>Project README</h1> %>
-    <%# <div class="welcome_readme"> %>
-      <%#= markdown(@readme_text) %>
-    <%# </div> %>
+    <h2>Project README</h2>
+    <div class="welcome_readme">
+      <%= markdown(@readme_text) %>
+    </div>
+    <h2>GitHub Project Information</h2>
+    <div class="welcome_github">
+      <div><strong>Github Repo Name:</strong> <%= @repo.name %><br><br>
+      <strong>Number of PRs:</strong> <%= @repo.pr %></div>
+      <div><table>
+        <tr><th>Contributor</th><th>Number of Commits</th></tr>
+        <% @repo.team_members.each do |contributor| %>
+          <tr>
+            <td><%= link_to contributor[:login], "https://www.github.com/#{contributor[:login]}" %></td>
+            <td><%= contributor[:commits] %></td>
+          </tr>
+        <% end %>
+      </table></div>
+    </div>
   </div>
 </div>

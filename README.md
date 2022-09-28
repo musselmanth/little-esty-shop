@@ -1,4 +1,4 @@
-# Little Esty Shop - [Tom Musselman](https://github.com/musselmanth)
+# Little Esty Shop Rails App
 
 ## Links
 
