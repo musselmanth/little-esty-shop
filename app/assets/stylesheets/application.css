@@ -188,6 +188,7 @@ body {
   border-radius: 20px;
   margin-bottom: 30px;
   box-shadow: 10px 10px 10px gray;
+  background-color: #fbfbfb;
 }
 
 .nav_button:hover {
