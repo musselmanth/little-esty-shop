@@ -16,13 +16,14 @@
 
 body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
 }
 
 #page_title {
   color: black;
   text-align: center;
   font-weight: 900;
-  font-size: 3rem;
+  font-size: 4rem;
   text-shadow: 1px 1px 0px gray, 2px 2px 0px darkgray, 5px 5px 3px lightgray;
   margin: 0px;
 }
@@ -71,7 +72,7 @@ body {
 
 .invoice_items th {
   background-color: darkgray;
-  color: white;
+  color: #f5f5f5;
   padding-top: 5px;
   padding-bottom: 5px;
   border: 1px solid black;
@@ -128,11 +129,12 @@ body {
 .welcome_nav_button_left {
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 200px;
+  width: 255px;
   border-bottom-left-radius: 20px;
   font-size: 10px;
   text-align: center;
   border: 1px solid lightgray;
+  border-right: 0px;
   border-top: 3px solid black;
   background-color: lightgray;
   transition: all 0.5s;
@@ -141,11 +143,12 @@ body {
 .welcome_nav_button_right {
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 200px;
+  width: 255px;
   border-bottom-right-radius: 20px;
   text-align: center;
   font-size: 10px;
   border: 1px solid lightgray;
+  border-left: 0px;
   background-color: lightgray;
   border-top: 3px solid black;
   transition: all 0.5s;
@@ -157,6 +160,7 @@ body {
   border-bottom-left-radius: 20px;
   font-size: 10px;
   border: 1px solid lightgray;
+  border-right: 0px;
   border-top: 3px solid black;
   background-color: darkgray;
 }
@@ -167,6 +171,7 @@ body {
   border-bottom-right-radius: 20px;
   font-size: 10px;
   border: 1px solid lightgray;
+  border-left: 0px;
   border-top: 3px solid black;
   background-color: darkgray;
 }
