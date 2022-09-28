@@ -219,6 +219,13 @@ img {
 
 .welcome_github div table th {
   text-align: left;
+  padding: 2px;
+  padding-left: 10px;
+}
+
+.welcome_github div table td {
+  padding: 2px;
+  padding-left: 10px;
 }
 
 .nav_button:hover {
