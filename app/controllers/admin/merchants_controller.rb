@@ -13,34 +13,40 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
+    @merchant = Merchant.new
   end
 
   def create
-    merchant = Merchant.new(merchant_params)
+    @merchant = Merchant.new(merchant_params)
 
-    if merchant.save
+    if @merchant.save
+      flash[:messages] = ["Merchant #{@merchant.name} successfully created"]
       redirect_to  "/admin/merchants"
+    else
+      flash[:messages] = @merchant.errors.full_messages
+      render :new
     end
   end
 
   def update
-    merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
 
     if params.has_key?(:status)
-      merchant.update(merchant_params)
+      @merchant.update(status: params[:status])
       redirect_to admin_merchants_path
+    elsif @merchant.update(merchant_params)
+      flash[:messages] = ["Merchant information successfully updated"]
+      redirect_to admin_merchant_path(@merchant.id)
     else
-      merchant.update(merchant_params)
-      redirect_to "/admin/merchants/#{merchant.id}"
-      flash[:messages] = ["You've successfully updated your information"]
+      flash[:messages] = @merchant.errors.full_messages
+      render :edit
     end
   end
-
 
 private
 
   def merchant_params
-    params.permit(:name, :created_at, :updated_at, :status)
+    params.require(:merchant).permit(:name, :status)
   end
 
 end

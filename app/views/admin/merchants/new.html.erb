@@ -2,7 +2,7 @@
 <h2 class="subtitle">New Merchant</h2>
 
 <div class="inv_info">
-  <%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
+  <%= form_with model: [:admin, @merchant], local: true do |form| %>
     <%= form.label :name, "Merchant Name: " %> 
     <%= form.text_field :name %><br>
     <%= form.hidden_field :status, value: false %>

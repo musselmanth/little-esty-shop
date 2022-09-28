@@ -9,12 +9,12 @@ RSpec.describe "Merchants Edit Page" do
     visit "admin/merchants/#{merchant2.id}/edit"
 
     expect(page).to have_content("Darnelles Daysies")
-
-    fill_in :name, with: "Roses Roses"
+    
+    fill_in :merchant_name, with: "Roses Roses"
     click_on "Update Merchant"
 
     expect(current_path).to eq("/admin/merchants/#{merchant2.id}")
-    expect(page).to have_content("You've successfully updated your information")
+    expect(page).to have_content("Merchant information successfully updated")
     expect(page).to have_content("Roses Roses Show Page")
     expect(page).to_not have_content("Darnelles Daysies Show Page")
   end

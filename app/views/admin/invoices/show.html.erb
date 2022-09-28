@@ -3,9 +3,9 @@
 <div class="inv_info">
   <div class="invoice_status_container" id="status-update-<%= @invoice.id %>">
     <strong>Status:&nbsp;</strong>
-    <%= form_with model: [:admin, @invoice], local: true do |f| %>
-      <%= f.select :status, [["In Progress", :in_progress], ["Completed", :completed], ["Cancelled", :cancelled]] %>
-      <%= f.submit %>
+    <%= form_with model: [:admin, @invoice], local: true do |form| %>
+      <%= form.select :status, [["In Progress", :in_progress], ["Completed", :completed], ["Cancelled", :cancelled]] %>
+      <%= form.submit %>
     <% end %>
   </div>
 </div>
