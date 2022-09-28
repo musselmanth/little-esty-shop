@@ -14,10 +14,11 @@ namespace :csv_load do
         created_at: row[3],
         updated_at: row[4]
       )
+      print "."
     end
 
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
 
-    puts "Loaded Invoices"
+    puts "\nLoaded Invoices"
   end
 end
