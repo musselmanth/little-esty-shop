@@ -10,6 +10,7 @@
       <div><strong>Github Repo Name:</strong> <%= @repo.name %><br><br>
       <strong>Number of PRs:</strong> <%= @repo.pr %></div>
       <div><table>
+        <tr><th colspan="2">Top Github Contributors</th></tr>
         <tr><th>Contributor</th><th>Number of Commits</th></tr>
         <% @repo.team_members.each do |contributor| %>
           <tr>
