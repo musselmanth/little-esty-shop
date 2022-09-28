@@ -22,4 +22,8 @@ class BulkDiscount < ApplicationRecord
   def convert_discount_to_decimal
     self.discount /= 100
   end
+
+  def self.all_holidays
+    pluck(:holiday)
+  end
 end

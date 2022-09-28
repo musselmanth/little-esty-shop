@@ -37,6 +37,7 @@ FactoryBot.define do
 
   factory :bulk_discount do
     merchant
+    holiday { "2022-12-25" }
     threshold { 10 }
     discount { 15 }
   end

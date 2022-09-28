@@ -2,7 +2,7 @@ class Merchants::BulkDiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discounts = @merchant.bulk_discounts
-    @holidays = HolidayService.get_three_holidays
+    @holidays = HolidayFacade.generate_holidays
   end
 
   def show
@@ -12,7 +12,7 @@ class Merchants::BulkDiscountsController < ApplicationController
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
-    @bulk_discount ||= BulkDiscount.new(merchant: @merchant)
+    @bulk_discount ||= BulkDiscount.new(threshold: params[:threshold], discount: params[:discount], holiday: params[:holiday])
   end
 
   def create
@@ -56,6 +56,6 @@ class Merchants::BulkDiscountsController < ApplicationController
   private
 
   def bulk_discount_params
-    params.require(:bulk_discount).permit(:threshold, :discount, :merchant_id)
+    params.require(:bulk_discount).permit(:threshold, :discount, :merchant_id, :holiday)
   end
 end

@@ -47,9 +47,9 @@ RSpec.configure do |config|
     ])
     allow(GithubService).to receive(:get_pulls).and_return([{number: 74}])
     allow(HolidayService).to receive(:get_three_holidays).and_return([
-      { date: '12/25/22', name: 'Christmas Day' },
-      { date: '12/31/22', name: 'New Years Eve'},
-      { date: '1/1/23', name: 'New Years Day'}
+      { date: '2022-12-25', name: 'Christmas Day' },
+      { date: '2022-12-31', name: 'New Years Eve'},
+      { date: '2023-01-01', name: 'New Years Day'}
     ])
   end
 

@@ -75,7 +75,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
   it 'displays the discount percentage and link to bulk discount on invoice_items table' do
     within("tr#invoice_item_#{@inv_item_1.id}") do
-      expect(page).to have_content("#{percent_convert(@bulk_discount.discount)} - ")
+      expect(page).to have_content("#{percent_convert(@bulk_discount.discount)} off - ")
       expect(page).to have_link("View Discount")
       click_link("View Discount")
       
