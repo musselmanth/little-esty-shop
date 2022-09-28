@@ -18,5 +18,7 @@ namespace :csv_load do
     end
 
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+
+    puts "Loaded Transactions"
   end
 end

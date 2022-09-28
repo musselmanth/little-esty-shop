@@ -20,5 +20,7 @@ namespace :csv_load do
     end
 
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+
+    puts "Loaded Invoice Items"
   end
 end
