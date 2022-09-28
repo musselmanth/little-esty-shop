@@ -240,6 +240,8 @@ a:visited {
   text-align: center;
   border-top: 2px solid black;
   background-color: lightgray;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .inv_info {
