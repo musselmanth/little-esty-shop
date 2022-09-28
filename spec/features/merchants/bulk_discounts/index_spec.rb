@@ -61,10 +61,10 @@ RSpec.describe 'Merchant Bulk Discount Index Page' do
   it 'lists 3 upcoming holidays' do
     expect(page).to have_content("Upcoming US Holidays")
     expect(page).to have_content("Christmas Day")
-    expect(page).to have_content("12/31/22")
+    expect(page).to have_content("December 25, 2022")
     expect(page).to have_content("New Years Eve")
-    expect(page).to have_content("12/31/22")
+    expect(page).to have_content("December 31, 2022")
     expect(page).to have_content("New Years Day")
-    expect(page).to have_content("1/1/23")
+    expect(page).to have_content("January 1, 2023")
   end
 end

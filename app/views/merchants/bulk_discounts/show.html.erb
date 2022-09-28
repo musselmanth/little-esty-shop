@@ -2,6 +2,7 @@
 <h2 class="subtitle">Bulk Discount | id: <%= @bulk_discount.id %></h2>
 <p>
 Item Quantity Threshold: <%= @bulk_discount.threshold %> items<br>
-Discount Percentage: <%= percent_convert(@bulk_discount.discount) %>
+Discount Percentage: <%= percent_convert(@bulk_discount.discount) %><br>
+Holiday: <%= @bulk_discount.holiday %>
 </p>
 <%= link_to "Edit Bulk Discount", edit_merchant_bulk_discount_path(@merchant.id) %>

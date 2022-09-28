@@ -9,7 +9,10 @@
       <div class="bulk_discount" id="discount_<%= bulk_discount.id %>">
         <strong><%= link_to "Bulk Discount #{i + 1}", merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></strong> | <%= link_to "Delete", merchant_bulk_discount_path(@merchant.id, bulk_discount.id), method: :delete %><br>
         Item Quantity Threshold: <%= bulk_discount.threshold %> items<br>
-        Discount Percentage: <%= percent_convert(bulk_discount.discount) %>
+        Discount Percentage: <%= percent_convert(bulk_discount.discount) %><br>
+          <% unless bulk_discount.holiday.empty? %>
+            Holiday: <%= bulk_discount.holiday %>
+          <% end %>
       </div>
     <% end %>
   </div>
@@ -18,7 +21,12 @@
       <ol>
         <% @holidays.each do |holiday| %>
           <li class="holiday">
-            <strong><%= holiday[:name] %></strong><br><%= holiday[:date] %>
+            <div class ="holiday_name"><strong><%= holiday.name %></strong><br><%= holiday.date.strftime("%A, %B %-d, %Y") %></div>
+              <% if holiday.has_discount? %>
+                <div><%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, holiday.discount_id) %></div>
+              <% else %>
+                <div><%= button_to "Create Holiday Discount", new_merchant_bulk_discount_path(@merchant.id), method: :get, params:[ threshold: 2, discount: 30, holiday: holiday.name ] %></div>
+              <% end %>
           </li>
         <% end %>
       </ol>

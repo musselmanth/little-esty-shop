@@ -1,11 +1,12 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
-<h2 class="subtitle">New Bulk Discount</h2>
+<h2 class="subtitle">New <%= "#{params[:holiday]}" %> Bulk Discount</h2>
 <div class="inv_info">
 <%= form_with model: [:merchant, @bulk_discount], local: true do |f| %>
   <%= f.label :threshold, "Item Quantity Threshold: " %>
   <%= f.text_field :threshold, size: 3 %><br>
   <%= f.label :discount, "Percent Discount: " %>
   <%= f.text_field :discount, size: 3 %>%<br>
+  <%= f.hidden_field :holiday %>
   <%= f.submit "Create Bulk Discount" %>
 <% end %>
 </div>

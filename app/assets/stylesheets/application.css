@@ -308,6 +308,12 @@ a:visited {
 
 .holiday {
   padding: 10px;
+  display:flex;
+  flex-direction: row;
+}
+
+.holiday_name {
+  width: 250px;
 }
 
 
