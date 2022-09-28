@@ -1,5 +1,5 @@
 <div id="merchants_nav">
-  <span id="merchant_name">Merchant: <%= merchant.name %></span>
+  <span id="nav_bar_title">Merchant: <%= merchant.name %></span>
   <ul id="nav_buttons">
     <% if current_page?(merchant_dashboard_path(merchant.id)) %>
       <li class="selected_nav_button">Dashboard</li>
