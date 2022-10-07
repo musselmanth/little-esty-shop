@@ -7,6 +7,7 @@
   <div class="inv_info"><strong>Total Revenue:</strong> <%= price_convert(@invoice_items.total_revenue) %></div>
   <div class="inv_info"><strong>Total Discounted Revenue:</strong> <%= price_convert(@invoice_items.revenue_with_discounts) %></div>
   <div class="inv_info"><strong>Items on this Invoice:</strong></div>
+  <%= form_with model: [@merchant, @invoice].compact, local: true do |form| %>
   <table class="invoice_items" id="merchant_invoice_items">
     <tr>
       <th>Item Name</th>
@@ -15,24 +16,29 @@
       <th>Bulk Discount</th>
       <th>Status</th>
     </tr>
-    <% @invoice_items.each do |invoice_item| %>
-      <tr id="invoice_item_<%= invoice_item.id %>">
-        <td><%= invoice_item.item_name %></td>
-        <td><%= invoice_item.quantity %></td>
-        <td><%= price_convert(invoice_item.unit_price) %></td>
-        <td>
-          <% if invoice_item.bulk_discount %>
-            <%= percent_convert(invoice_item.bulk_discount.discount) %> off - <%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, invoice_item.bulk_discount.id) %>
-          <% else %>
-            N/A
-          <% end %>
-        </td>
-        <td>
-          <%= form_with model: invoice_item, url: merchant_invoice_item_path(@merchant.id, invoice_item.id), local: true do |f| %>
-            <%= f.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]] %>
-            <%= f.submit "Update Status" %>
-          <% end %>   
-        </td>
+    
+      <% @invoice_items.each do |invoice_item| %>
+        <tr id="invoice_item_<%= invoice_item.id %>">
+          <td><%= invoice_item.item_name %></td>
+          <td><%= invoice_item.quantity %></td>
+          <td><%= price_convert(invoice_item.unit_price) %></td>
+          <td>
+            <% if invoice_item.bulk_discount %>
+              <%= percent_convert(invoice_item.bulk_discount.discount) %> off - <%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, invoice_item.bulk_discount.id) %>
+            <% else %>
+              N/A
+            <% end %>
+          </td>
+          <td>
+            <%= form.fields_for :invoice_items, invoice_item do |ii_fields| %>
+              <%= ii_fields.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]] %>
+            <% end %>   
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"></td>
+        <td><%= form.submit "Update Statuses" %></td>
       </tr>
     <% end %>
   </table>

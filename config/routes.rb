@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     scope module: :merchants do
       get '/dashboard', to: 'dashboard#show', as: :dashboard
       resources :items, except: [:destroy]
-      resources :invoices, only: [:index, :show]
+      resources :invoices, only: [:index, :show, :update]
       resources :bulk_discounts
       resources :invoice_items, only: [:update]
     end
