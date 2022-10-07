@@ -7,6 +7,8 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :bulk_discounts, through: :invoice_items
 
+  accepts_nested_attributes_for :invoice_items
+
   enum status: [:in_progress, :completed, :cancelled]
 
   def self.incomplete_invoices
