@@ -24,13 +24,6 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'instance methods' do
-    describe '.item_name' do
-      it 'returns the name of the associated item' do
-        invoice_item = create(:invoice_item)
-
-        expect(invoice_item.item_name).to eq(invoice_item.item.name)
-      end
-    end
 
     describe'.invoice_date' do
       it 'returns the date thats its invoice was created' do

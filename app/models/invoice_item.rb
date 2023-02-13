@@ -37,10 +37,6 @@ class InvoiceItem < ApplicationRecord
       .first
   end
 
-  def item_name
-    item.name
-  end
-
   def invoice_date
     invoice.created_at
   end
